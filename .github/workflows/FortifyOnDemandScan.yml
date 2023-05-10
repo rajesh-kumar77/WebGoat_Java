@@ -58,7 +58,7 @@ jobs:
             FOD_TENANT: "emeademo"  
             FOD_USER: "rajeshdemo"
             FOD_PAT: "bUV3fmRMVFV3bFA4IXMwZ0d5UjhpXG9vUWozRTFm0"
-            FOD_RELEASE_ID: "1.0"
+            FOD_RELEASE_ID: "120947"
             FOD_URL: "https://emea.fortify.com/"
             FOD_API_URL: "https://api.emea.fortify.com/"
             FOD_UPLOADER_OPTS: "-ep 2 -pp 0"
