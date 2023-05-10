@@ -37,7 +37,7 @@ on:
       #   ScanCentral Client will download dependencies for maven, gradle and msbuild projects.
       #   For other build tools, add your build commands to the workflow to download necessary dependencies and prepare according to Fortify on Demand Packaging documentation.
       - name: Download Fortify ScanCentral Client
-        uses: fortify/gha-setup-scancentral-client@v1
+        uses: fortify/gha-setup-scancentral-client@v1.2.0
       - name: Package Code + Dependencies
         run: scancentral package $PACKAGE_OPTS -o package.zip
         env:
@@ -53,7 +53,7 @@ on:
           FOD_USER: ${{ secrets.FOD_USER }}
           FOD_PAT: ${{ secrets.FOD_PAT }}
           FOD_RELEASE_ID: ${{ secrets.FOD_RELEASE_ID }}
-          FOD_URL: "https://ams.fortify.com/"
-          FOD_API_URL: "https://api.ams.fortify.com/"
+          FOD_URL: "https://emea.fortify.com/"
+          FOD_API_URL: "https://api.emea.fortify.com/"
           FOD_UPLOADER_OPTS: "-ep 2 -pp 0"
           FOD_UPLOADER_NOTES: 'Triggered by GitHub Actions (${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})'
