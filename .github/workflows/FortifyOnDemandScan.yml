@@ -13,6 +13,10 @@ jobs:
       # Use the appropriate runner for building your source code. 
       # Use Windows runner for projects that use msbuild. Additional changes to RUN commands will be required.
       runs-on: ubuntu-latest
+      permissions:
+        actions: read
+        contents: read
+        security-events: write
 
       steps:
         # Check out source code
@@ -31,7 +35,8 @@ jobs:
         - name: Setup Java
           uses: actions/setup-java@v1
           with:
-            java-version: 1.8
+            java-version: 11
+            distribution: 'zulu'
 
         # Prepare source+dependencies for upload. 
         # Update PACKAGE_OPTS based on the ScanCentral Client documentation and your project's included tech stack(s).
@@ -42,7 +47,7 @@ jobs:
         - name: Package Code + Dependencies
           run: scancentral package $PACKAGE_OPTS -o package.zip
           env:
-            PACKAGE_OPTS: "-bt mvn"
+            PACKAGE_OPTS: "-bt none"
 
         # Start Fortify on Demand SAST scan. Be sure to set secrets/variables for your desired configuration.
         - name: Download Fortify on Demand Universal CI Tool
