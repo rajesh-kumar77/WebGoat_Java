@@ -1,5 +1,6 @@
 name: Import FoD SAST Results into GitHub Code Scanning Alerts
 on: 
+ workflow_dispatch:
  push:
   tags:
    - '*'
