@@ -20,7 +20,7 @@ jobs:
       uses: sonatype-nexus-community/iq-github-action@master
       with:
         serverUrl: http://192.168.150.128:8070/
-        username: admin
+        username: RRSfqzCs
         password: ${{ secrets.SONATYPE_PWD }}
         applicationId: sample-maven
         stage: Build
