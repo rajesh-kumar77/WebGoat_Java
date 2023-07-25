@@ -19,8 +19,8 @@ jobs:
     - name: Nexus IQ Policy Evaluation
       uses: sonatype-nexus-community/iq-github-action@master
       with:
-        serverUrl: http://192.168.150.128:8070
-        username: RRSfqzCs
+        serverUrl: https://3.84.24.170:14443/
+        username: koeIFKXW
         password: ${{ secrets.SONATYPE_PWD }}
         applicationId: sample-maven
         stage: Build
