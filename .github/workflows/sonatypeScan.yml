@@ -28,7 +28,7 @@ jobs:
     - name: Run Sonatype Scan
       run: |
             zip ./sample-application.zip -r -v *
-            java -jar nexus-iq-cli-1.165.0-01.jar -i sample-maven -s https://fortify.cyberxdemo.com:14443/ -a koeIFKXW:ZhuYl0xSrh4vIfWrwSV9lk9JZV6bpnNEWp2fF1ChnLXk ./sample-application.zip
+            java -jar latest.jar -i sample-maven -s https://fortify.cyberxdemo.com:14443/ -a koeIFKXW:ZhuYl0xSrh4vIfWrwSV9lk9JZV6bpnNEWp2fF1ChnLXk ./sample-application.zip
       
     #- name: Nexus IQ Policy Evaluation
       #uses: sonatype-nexus-community/iq-github-action@master
