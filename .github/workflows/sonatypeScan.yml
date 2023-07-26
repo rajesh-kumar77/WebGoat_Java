@@ -28,8 +28,10 @@ jobs:
               ls -l
               wget https://repository.emsign.com/certs/emSignRootCAG1.crt
               wget https://repository.emsign.com/certs/emSignSSLCAG1.crt
+              wget https://fortify.cyberxdemo.com:8443/ssc/downloads/fortify.cyberxdemo.com.crt
               sudo /opt/hostedtoolcache/jdk/17.0.8/x64/bin/keytool -keystore /opt/hostedtoolcache/jdk/17.0.8/x64/lib/security/cacerts -importcert -alias myroot -file emSignRootCAG1.crt -storepass changeit -noprompt
               sudo /opt/hostedtoolcache/jdk/17.0.8/x64/bin/keytool -keystore /opt/hostedtoolcache/jdk/17.0.8/x64/lib/security/cacerts -importcert -alias myroot1 -file emSignSSLCAG1.crt -storepass changeit -noprompt
+              sudo /opt/hostedtoolcache/jdk/17.0.8/x64/bin/keytool -keystore /opt/hostedtoolcache/jdk/17.0.8/x64/lib/security/cacerts -importcert -alias myroot2 -file fortify.cyberxdemo.com.crt -storepass changeit -noprompt
              
     - name: Build with Maven
       run: mvn package --file pom.xml
