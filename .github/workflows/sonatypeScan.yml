@@ -20,6 +20,7 @@ jobs:
               export RUNNER_ALLOW_RUNASROOT="1"
               export AGENT_ALLOW_RUNASROOT="1"
               sudo echo "75.101.132.221 fortify.cyberxdemo.com" | sudo tee -a /etc/hosts
+              cat /etc/hosts
     - name: Build with Maven
       run: mvn package --file pom.xml
     - name: Nexus IQ Policy Evaluation
