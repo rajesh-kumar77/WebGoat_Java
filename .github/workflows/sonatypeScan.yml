@@ -14,6 +14,8 @@ jobs:
       with:
         java-version: 17
         distribution: 'zulu'
+    - name: Disable EndpointIdentification
+      run: -Dcom.sun.jndi.ldap.object.disableEndpointIdentification=true
     - name: Build with Maven
       run: mvn package --file pom.xml
     - name: Nexus IQ Policy Evaluation
