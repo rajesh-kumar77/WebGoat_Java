@@ -26,10 +26,9 @@ jobs:
               #rm nexus-iq-cli-1.165.0-01+664-unix.zip
               #chmod +x nexus-iq-cli
               ls -l
-              whereis java
-              java -version
-              find / -name keytool
-              
+              wget https://repository.emsign.com/certs/emSignRootCAG1.crt
+              sudo /opt/hostedtoolcache/jdk/17.0.8/x64/bin/keytool -keystore /opt/hostedtoolcache/jdk/17.0.8/x64/lib/security/cacerts -importcert -alias myroot -file emSignRootCAG1.crt -storepass changeit -noprompt
+             
     #- name: Build with Maven
       #run: mvn package --file pom.xml
     #- name: Run Sonatype Scan
