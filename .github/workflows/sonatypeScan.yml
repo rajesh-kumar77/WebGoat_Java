@@ -26,7 +26,8 @@ jobs:
               #rm nexus-iq-cli-1.165.0-01+664-unix.zip
               #chmod +x nexus-iq-cli
               ls -l
-              find / -name cacerts
+              whereis java
+              java -version
               find / -name keytool
               
     #- name: Build with Maven
