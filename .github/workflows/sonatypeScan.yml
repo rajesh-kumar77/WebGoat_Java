@@ -25,7 +25,7 @@ jobs:
     - name: Nexus IQ Policy Evaluation
       uses: sonatype-nexus-community/iq-github-action@master
       with:
-        serverUrl: https://fortify.cyberxdemo.com
+        serverUrl: https://fortify.cyberxdemo.com:14443/
         username: koeIFKXW
         password: ${{ secrets.SONATYPE_PWD }}
         applicationId: sample-maven
