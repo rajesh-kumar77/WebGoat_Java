@@ -21,20 +21,20 @@ jobs:
               export AGENT_ALLOW_RUNASROOT="1"
               sudo echo "75.101.132.221 fortify.cyberxdemo.com" | sudo tee -a /etc/hosts
               cat /etc/hosts
-              #wget https://sonatype-download.global.ssl.fastly.net/repository/downloads-prod-group/scanner/nexus-iq-cli-1.165.0-01+664-unix.zip
-              #unzip nexus-iq-cli-1.165.0-01+664-unix.zip
-              #rm nexus-iq-cli-1.165.0-01+664-unix.zip
-              #chmod +x nexus-iq-cli
+              wget https://sonatype-download.global.ssl.fastly.net/repository/downloads-prod-group/scanner/nexus-iq-cli-1.165.0-01+664-unix.zip
+              unzip nexus-iq-cli-1.165.0-01+664-unix.zip
+              rm nexus-iq-cli-1.165.0-01+664-unix.zip
+              chmod +x nexus-iq-cli
               ls -l
               wget https://repository.emsign.com/certs/emSignRootCAG1.crt
               sudo /opt/hostedtoolcache/jdk/17.0.8/x64/bin/keytool -keystore /opt/hostedtoolcache/jdk/17.0.8/x64/lib/security/cacerts -importcert -alias myroot -file emSignRootCAG1.crt -storepass changeit -noprompt
              
-    #- name: Build with Maven
-      #run: mvn package --file pom.xml
-    #- name: Run Sonatype Scan
-      #run: |
-            #zip ./sample-application.zip -r -v *
-            #./nexus-iq-cli -i sample-maven -s https://fortify.cyberxdemo.com:14443/ -a koeIFKXW:ZhuYl0xSrh4vIfWrwSV9lk9JZV6bpnNEWp2fF1ChnLXk ./sample-application.zip
+    - name: Build with Maven
+      run: mvn package --file pom.xml
+    - name: Run Sonatype Scan
+      run: |
+            zip ./sample-application.zip -r -v *
+            ./nexus-iq-cli -i sample-maven -s https://fortify.cyberxdemo.com:14443/ -a koeIFKXW:ZhuYl0xSrh4vIfWrwSV9lk9JZV6bpnNEWp2fF1ChnLXk ./sample-application.zip
       
     #- name: Nexus IQ Policy Evaluation
       #uses: sonatype-nexus-community/iq-github-action@master
