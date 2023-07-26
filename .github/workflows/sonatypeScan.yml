@@ -14,14 +14,18 @@ jobs:
       with:
         java-version: 17
         distribution: 'zulu'
-    - name: Disable EndpointIdentification
-      run: -Dcom.sun.jndi.ldap.object.disableEndpointIdentification=true
+        # Optional, but required if ScanCentral Controller requires client authentication
+    - name: Setting FQDN address
+      run: |
+              export RUNNER_ALLOW_RUNASROOT="1"
+              export AGENT_ALLOW_RUNASROOT="1"
+              sudo echo "75.101.132.221 fortify.cyberxdemo.com" | sudo tee -a /etc/hosts
     - name: Build with Maven
       run: mvn package --file pom.xml
     - name: Nexus IQ Policy Evaluation
       uses: sonatype-nexus-community/iq-github-action@master
       with:
-        serverUrl: https://3.84.24.170:14443/
+        serverUrl: https://fortify.cyberxdemo.com
         username: koeIFKXW
         password: ${{ secrets.SONATYPE_PWD }}
         applicationId: sample-maven
