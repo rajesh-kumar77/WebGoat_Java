@@ -49,18 +49,8 @@ jobs:
               sourceanalyzer -b github-java-build -source 1.8 -cp "./**/*.jar" "./**/*.java" "./**/*.js" "./**/*.jsp" "./**/*.html" "./**/*.properties" "./**/*.xml"
               sourceanalyzer -b github-java-build -scan -f github-sast-report.fpr
               fortifyclient -url http://54.81.13.64:8180/ssc -authtoken 5700ab1e-0af3-46d0-8289-e539540c3439 -application "simplisticrabbitmq" -applicationVersion "11.0" uploadFPR -file github-sast-report.fpr
-        - name: 'fpr-to-sarif'
-            description: 'Convert Fortify FPR files to SARIF format'
-            author: 'Fortify'
-            inputs:
-              input:
-                description: 'Location of FPR file or directory containing FPR files'
-                required: true
-                default: '.'
-            outputDir:
-              description: 'Directory where generated SARIF files will be stored'
-              required: true
-              default: '.'
-          runs:
-            using: 'node12'
-            main: 'dist/index.js'
+        - name: Convert Fortify FPR files to SARIF format
+          uses: fortify/gha-fpr-to-sarif@v1
+          with: 
+            input: 'github-sast-report.fpr'
+            outputDir: ''
