@@ -49,7 +49,7 @@ jobs:
               sourceanalyzer -b github-java-build -source 1.8 -cp "./**/*.jar" "./**/*.java" "./**/*.js" "./**/*.jsp" "./**/*.html" "./**/*.properties" "./**/*.xml"
               sourceanalyzer -b github-java-build -scan -f github-sast-report.fpr
         - name: Convert Fortify FPR files to SARIF format
-          uses: fortify/gha-fpr-to-sarif@v1
+          uses: fortify/gha-fpr-to-sarif
           with: 
             input: 'github-sast-report.fpr'
             outputDir: 'C:/Demo/Github'
