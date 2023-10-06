@@ -43,14 +43,13 @@ jobs:
           run: mvn -B package --file pom.xml
         - name: Configure and Start Fortify Stand alone SAST scan
           run: |
-              export PATH=$PATH:/home/runner/Fortify/Fortify_SCA_and_Apps_21.1.1/bin
+              PATH=%PATH%;C:/Program Files/Fortify/Fortify_SCA_and_Apps_22.2.1/bin
               fortifyupdate
               sourceanalyzer -b github-java-build -clean
               sourceanalyzer -b github-java-build -source 1.8 -cp "./**/*.jar" "./**/*.java" "./**/*.js" "./**/*.jsp" "./**/*.html" "./**/*.properties" "./**/*.xml"
               sourceanalyzer -b github-java-build -scan -f github-sast-report.fpr
-              fortifyclient -url http://54.81.13.64:8180/ssc -authtoken 5700ab1e-0af3-46d0-8289-e539540c3439 -application "simplisticrabbitmq" -applicationVersion "11.0" uploadFPR -file github-sast-report.fpr
         - name: Convert Fortify FPR files to SARIF format
           uses: fortify/gha-fpr-to-sarif@v1
           with: 
             input: 'github-sast-report.fpr'
-            outputDir: ''
+            outputDir: 'C:/Demo/Github'
