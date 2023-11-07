@@ -47,7 +47,7 @@ public class SecurePasswordsAssignment extends AssignmentEndpoint {
     Strength strength = zxcvbn.measure(password);
 
     output.append("<b>Your Password: *******</b></br>");
-    output.append("<b>Length: </b>" + password.length() + "</br>");
+    //output.append("<b>Length: </b>" + password.length() + "</br>");
     output.append(
         "<b>Estimated guesses needed to crack your password: </b>"
             + df.format(strength.getGuesses())
