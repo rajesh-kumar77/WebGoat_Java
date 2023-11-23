@@ -28,7 +28,7 @@ jobs:
             FOD_TENANT: ${{secrets.FOD_TENANT}}
             FOD_USER: ${{secrets.FOD_USER}}
             FOD_PASSWORD: ${{secrets.FOD_PAT}}
-            FOD_RELEASE: Sample_WebGoat_Java:14.0          
+            FOD_RELEASE: "Sample_WebGoat_Java:14.0"          
             EXTRA_PACKAGE_OPTS: "-bt mvn"
           # EXTRA_FOD_LOGIN_OPTS: --socket-timeout=60s
           # FOD_RELEASE: MyApp:MyRelease
