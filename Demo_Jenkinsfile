@@ -5,6 +5,12 @@ pipeline {
         steps{
 	        bat 'mvn --version'
             bat 'mvn clean compile'
+            fortifyClean addJVMOptions: '', buildID: 'demo', logFile: '', maxHeap: ''
+            fortifyUpdate acceptKey: true, locale: 'en', updateServerURL: 'https://update.fortify.com'
+            fortifyTranslate addJVMOptions: '', buildID: 'demo', excludeList: '', logFile: '', maxHeap: '', projectScanType: fortifyJava(javaAddOptions: '-verbose', javaClasspath: '', javaSrcFiles: '', javaVersion: '17')
+            fortifyScan addJVMOptions: '', addOptions: '', buildID: 'demo', customRulepacks: '', logFile: '', maxHeap: '', resultsFile: 'Demo_Result.fpr'
+            fortifyUpload appName: 'Demo_WebGoatJava', appVersion: '1.0', failureCriteria: '', filterSet: '', pollingInterval: '1', resultsFile: 'Demo_Result.fpr', timeout: ''
+          }
         }
       }
     }
