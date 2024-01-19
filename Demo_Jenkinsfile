@@ -2,9 +2,10 @@ pipeline {
     agent any
     stages {
      stage('log version') {
-	    bat 'mvn --version'
-        bat 'mvn clean'
-	    bat 'mvn compile'
+        steps{
+	        bat 'mvn --version'
+            bat 'mvn clean compile'
+        }
       }
     }
 }
