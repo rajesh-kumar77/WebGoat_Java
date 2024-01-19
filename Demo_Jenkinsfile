@@ -4,7 +4,6 @@ pipeline {
       stage('loge version info') {
         steps {
           bat 'mvn --version'
-          bat 'mvn clean install'
         }
       }
     }
