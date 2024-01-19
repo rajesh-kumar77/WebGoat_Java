@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+    stages {
+      stage('loge version info') {
+        steps {
+          sh 'mvn --version'
+          sh 'mvn clean install'
+        }
+      }
+    }
+}
