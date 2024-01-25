@@ -8,7 +8,7 @@ pipeline {
             fortifyClean addJVMOptions: '', buildID: 'demo', logFile: '', maxHeap: ''
             fortifyUpdate acceptKey: true, locale: 'en', updateServerURL: 'https://update.fortify.com'
             fortifyTranslate addJVMOptions: '', buildID: 'demo', excludeList: '', logFile: '', maxHeap: '', projectScanType: fortifyJava(javaAddOptions: '-verbose', javaClasspath: 'target/classes/**/*', javaSrcFiles: 'src/**/*.java', javaVersion: '17')
-            fortifyRemoteScan buildID: 'demo', remoteOptionalConfig: [customRulepacks: '', filterFile: '', notifyEmail: '', scanOptions: '-bt mvn', sensorPoolUUID: '00000000-0000-0000-0000-000000000002'], uploadSSC: [appName: 'Demo_WebGoatJava', appVersion: '2.0']
+            fortifyRemoteAnalysis remoteAnalysisProjectType: fortifyMaven(buildFile: ''), uploadSSC: [appName: 'Demo_WebGoatJava', appVersion: '2.0']            
          }
       }
     }
