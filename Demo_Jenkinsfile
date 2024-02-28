@@ -5,7 +5,7 @@ pipeline {
         steps{
 	        fortifyClean addJVMOptions: '', buildID: 'demo', logFile: 'Demo_WebGoatJava_Fortify.log', maxHeap: ''
             fortifyTranslate addJVMOptions: '', buildID: 'demo', excludeList: '', logFile: 'Demo_WebGoatJava_Translate.log', maxHeap: '', projectScanType: fortifyMaven3(mavenInstallationName: '(Default)', mavenOptions: '')
-            fortifyRemoteScan buildID: 'demo', remoteOptionalConfig: [customRulepacks: '', filterFile: '', notifyEmail: '', scanOptions: '', sensorPoolUUID: '00000000-0000-0000-0000-000000000002'], uploadSSC: [appName: 'Demo_WebGoatJava', appVersion: '4.0']
+            fortifyRemoteScan buildID: 'demo', remoteOptionalConfig: [customRulepacks: '', filterFile: '', notifyEmail: '', scanOptions: '', sensorPoolUUID: '00000000-0000-0000-0000-000000000002'], uploadSSC: [appName: 'Demo_WebGoatJava', appVersion: '5.0']
          }
       }
     }
