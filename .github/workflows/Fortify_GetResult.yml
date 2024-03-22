@@ -1,0 +1,30 @@
+name: Import FOD SAST Results (SARIF format) into GitHub Code Scanning
+on: 
+ workflow_dispatch:
+ push:
+  tags:
+   - '*'
+      
+jobs:                                                  
+  Export-FoD-To-GitHub:
+    runs-on: ubuntu-latest
+    permissions:
+        actions: read
+        contents: read
+        security-events: write
+    steps:
+       - uses: actions/checkout@v3
+       - name: Setup Java
+         uses: actions/setup-java@v3
+         with:
+          java-version: 17
+          distribution: 'zulu' 
+       - name: Export FoD vulnerability data to GitHub
+         uses: fortify/github-action/fod-export@v1
+         env:
+            FOD_URL: "https://emea.fortify.com/"
+            FOD_TENANT: ${{secrets.FOD_TENANT_DEMO}}
+            FOD_USER: ${{secrets.FOD_USER_DEMO}}
+            FOD_PASSWORD: ${{secrets.FOD_PAT_DEMO}}
+            FOD_RELEASE: "Sample_WebGoat_Java:5.0"
+            # TOOL_DEFINITIONS: https://ftfy.mycompany.com/tool-definitions/v1/tool-definitions.yaml.zip
