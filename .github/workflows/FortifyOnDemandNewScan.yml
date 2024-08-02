@@ -33,7 +33,7 @@ jobs:
           uses: fortify/github-action/fod-sast-scan@v1
           env:
             FOD_URL: "https://ams.fortify.com/"
-            FOD_TENANT: ${{secrets.FOD_AMS_TENANT_DEMO}}
+            FOD_TENANT: ${{secrets.FOD_AMS_TENANT}}
             FOD_USER: ${{secrets.FOD_AMS_USER_DEMO}}
             FOD_PASSWORD: ${{secrets.FOD_AMS_PAT_DEMO}}
             FOD_RELEASE: "Sample_WebGoat_Java:1.0"          
