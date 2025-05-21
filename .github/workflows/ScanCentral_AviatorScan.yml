@@ -24,9 +24,9 @@ jobs:
           with:
              java-version: 17
              distribution: 'zulu'
-        - name: Setting FQDN address
+        - name: Setting up environmant
           run: |
-              echo ${{secrets.AVIATOR_PRIVATE_KEY}} > private_key.pem
+              printf ${{secrets.AVIATOR_PRIVATE_KEY}} > private_key.pem
         - name: Run ScanCentral Aviator SAST Scan
           run: |
             java -jar fcli.jar fcli aviator admin-config create --url https://ams.aviator.fortify.com --tenant demo_presales --private-key private_key.pem
