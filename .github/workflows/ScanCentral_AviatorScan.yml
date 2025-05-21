@@ -42,7 +42,7 @@ jobs:
               sudo echo "54.210.223.77 fortify.cyberxdemo.com" | sudo tee -a /etc/hosts
               cat /etc/hosts
               wget https://github.com/fortify/fcli/releases/download/v3.5.0/fcli.jar
-              echo ${{ secrets.AVIATOR_PRIVATE_KEY }} > private_key.pem
+              cat ${{secrets.AVIATOR_PRIVATE_KEY}} > private_key.pem
         - name: Run ScanCentral Aviator SAST Scan
           run: |
             java -jar fcli.jar fcli aviator admin-config create --url https://ams.aviator.fortify.com --tenant demo_presales --private-key private_key.pem
