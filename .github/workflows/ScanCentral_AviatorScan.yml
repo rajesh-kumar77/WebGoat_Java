@@ -1,0 +1,53 @@
+name: Scan Central SAST Aviator Scan
+
+on: 
+  workflow_dispatch:
+  push:
+    branches: [master]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [master]
+    
+jobs:  
+    SSC-SAST-Aviator-Scan:
+      # Use the appropriate runner for building your source code. 
+      # Use Windows runner for projects that use msbuild. Additional changes to RUN commands will be required.
+      runs-on: ubuntu-latest
+      permissions:
+        actions: read
+        contents: read
+        security-events: write
+
+      steps:
+        - name: Setup Java
+          uses: actions/setup-java@v1
+          with:
+             java-version: 17
+             distribution: 'zulu'
+        - name: Setting FQDN address
+          run: |
+              export RUNNER_ALLOW_RUNASROOT="1"
+              export AGENT_ALLOW_RUNASROOT="1"
+              wget https://repository.emsign.com/certs/emSignRootCAG1.crt
+              wget https://repository.emsign.com/certs/emSignSSLCAG1.crt
+              sudo apt-get install -y ca-certificates
+              sudo cp emSignRootCAG1.crt /usr/local/share/ca-certificates
+              sudo cp emSignSSLCAG1.crt /usr/local/share/ca-certificates
+              sudo update-ca-certificates
+              keytool -importcert -file "fortify.cyberxdemo.com.crt" -keystore truststore.jks -alias "Alias3"
+              
+              keytool -importcert -noprompt -trustcacerts -alias MyAl3 -file "emSignRootCAG1.crt" -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit
+              keytool -import -noprompt -trustcacerts -alias MyA2 -file "emSignSSLCAG1.crt" -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit
+              ls -l $JAVA_HOME/lib/security/cacerts
+              sudo echo "54.210.223.77 fortify.cyberxdemo.com" | sudo tee -a /etc/hosts
+              cat /etc/hosts
+              wget https://github.com/fortify/fcli/releases/download/v3.5.0/fcli.jar
+              echo ${{ secrets.AVIATOR_PRIVATE_KEY }} > private_key.pem
+        - name: Run ScanCentral Aviator SAST Scan
+          run: |
+            java -jar fcli.jar fcli aviator admin-config create --url https://ams.aviator.fortify.com --tenant demo_presales --private-key private_key.pem
+            java -jar fcli.jar aviator app create "Sample_WebGoatJava"
+            java -jar fcli.jar aviator token create --email rkumar13@opentext.com --name rkumar_personal --save-token token_fvb.json
+            java -jar fcli.jar aviator session login --url https://ams.aviator.fortify.com --token token_fvb.json
+            java -jar fcli.jar ssc session login --url https://fortify.cyberxdemo.com:8443/ssc -u sscadmin -p P@ssw0rd@123
+            java -jar fcli.jar aviator ssc audit --av "Sample_WebGoatJava:1.0" --app "Sample_WebGoatJava"
