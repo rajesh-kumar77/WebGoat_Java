@@ -46,21 +46,21 @@ jobs:
               #ls -l $JAVA_HOME/lib/security/cacerts
               sudo echo "34.227.109.49 fortify.cyberxdemo.com" | sudo tee -a /etc/hosts
               #cat /etc/hosts
-        - name: Run ScanCentral SAST Scan
-          uses: fortify/github-action/sc-sast-scan@v1
+        - name: Run ScanCentral SAST New Scan
+          uses: fortify/github-action@v1
+          with:
+            sast-scan: true
+            debricked-sca-scan: false
           env:
-            SSC_URL: "http://34.227.109.49:8180/ssc"
-            SSC_TOKEN: "ZjRmY2UxMDItNWE2ZC00NjgzLWIzNDItOGE0MzY5MDI0M2U3"
-            SC_SAST_TOKEN: "CHANGEME321!"
-            SSC_USER: ${{secrets.SSC_USER}}
-            SSC_PASSWORD: ${{secrets.SSC_PWD}}
-            SSC_APPVERSION: "My Application:1.0"
-            SC_SAST_SENSOR_VERSION: 23.2
-            EXTRA_PACKAGE_OPTS: "-bt mvn"
-            EXTRA_SC_SAST_LOGIN_OPTS: --insecure 
+            SSC_URL: ${{vars.SSC_URL}}
+            SSC_TOKEN: ${{secrets.SSC_TOKEN}}
+            SC_SAST_TOKEN: ${{secrets.SC_SAST_CLIENT_AUTH_TOKEN}}
+            PACKAGE_EXTRA_OPTS: -bt mvn
+            SC_SAST_LOGIN_EXTRA_OPTS: --insecure
+            SSC_APPVERSION: "Sample_WebGoatJava:1.0"
             DO_EXPORT: "true"
             
-            
+            # EXTRA_SC_SAST_LOGIN_OPTS: --insecure 
             # EXTRA_SC_SAST_LOGIN_OPTS: --socket-timeout=60s
             # DO_WAIT: true
             # TOOL_DEFINITIONS: https://ftfy.mycompany.com/tool-definitions/v1/tool-definitions.yaml.zip
