@@ -26,10 +26,13 @@ jobs:
              distribution: 'zulu'
         - name: Setting up environmant
           run: |
-              printf ${{secrets.AVIATOR_PRIVATE_KEY}} > private_key.pem
+              cat << EOF > ./private_key.pem
+              ${{ secrets.AVIATOR_PRIVATE_KEY }}
+              EOF
+              cat ./private_key.pem
         - name: Run ScanCentral Aviator SAST Scan
           run: |
-            java -jar fcli.jar fcli aviator admin-config create --url https://ams.aviator.fortify.com --tenant demo_presales --private-key private_key.pem
+            java -jar fcli.jar fcli aviator admin-config create --url https://ams.aviator.fortify.com --tenant demo_presales --private-key ./private_key.pem
             java -jar fcli.jar aviator app create "Sample_WebGoatJava"
             java -jar fcli.jar aviator token create --email rkumar13@opentext.com --name rkumar_personal --save-token token_fvb.json
             java -jar fcli.jar aviator session login --url https://ams.aviator.fortify.com --token token_fvb.json
