@@ -55,8 +55,8 @@ jobs:
             SSC_URL: ${{vars.SSC_URL}}
             SSC_TOKEN: ${{secrets.SSC_TOKEN}}
             SC_SAST_TOKEN: ${{secrets.SC_SAST_CLIENT_AUTH_TOKEN}}
-            SSC_USER: ${{secrets.SSC_USER}}
-            SSC_PASSWORD: ${{secrets.SSC_PWD}}
+            # SSC_USER: ${{secrets.SSC_USER}}
+            # SSC_PASSWORD: ${{secrets.SSC_PWD}}
             PACKAGE_EXTRA_OPTS: -bt mvn
             SC_SAST_LOGIN_EXTRA_OPTS: --insecure
             SSC_APPVERSION: "Sample_WebGoatJava:1.0"
