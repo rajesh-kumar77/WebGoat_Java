@@ -1,0 +1,66 @@
+name: Scan Central SAST Scan New
+
+on: 
+  workflow_dispatch:
+  push:
+    branches: [master]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [master]
+    
+jobs:  
+    SSC-SAST-Scan:
+      # Use the appropriate runner for building your source code. 
+      # Use Windows runner for projects that use msbuild. Additional changes to RUN commands will be required.
+      runs-on: ubuntu-latest
+      permissions:
+        actions: read
+        contents: read
+        security-events: write
+
+      steps:
+        - name: Check out source code
+          uses: actions/checkout@v4
+          # Java is required to run ScanCentral Client, and may be required for your build
+          # Java version to use depends on the Java version required to run your build (if any),
+          # and the Java version supported by the ScanCentral Client version that you are running
+        - name: Setup Java
+          uses: actions/setup-java@v1
+          with:
+             java-version: 17
+             distribution: 'zulu'
+        - name: Setting FQDN address
+          run: |
+              export RUNNER_ALLOW_RUNASROOT="1"
+              export AGENT_ALLOW_RUNASROOT="1"
+              #wget https://repository.emsign.com/certs/emSignRootCAG1.crt
+              #wget https://repository.emsign.com/certs/emSignSSLCAG1.crt
+              #sudo apt-get install -y ca-certificates
+              #sudo cp emSignRootCAG1.crt /usr/local/share/ca-certificates
+              #sudo cp emSignSSLCAG1.crt /usr/local/share/ca-certificates
+              #sudo update-ca-certificates
+              #keytool -importcert -file "fortify.cyberxdemo.com.crt" -keystore truststore.jks -alias "Alias3"
+              
+              #keytool -importcert -noprompt -trustcacerts -alias MyAl3 -file "emSignRootCAG1.crt" -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit
+              #keytool -import -noprompt -trustcacerts -alias MyA2 -file "emSignSSLCAG1.crt" -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit
+              #ls -l $JAVA_HOME/lib/security/cacerts
+              sudo echo "34.227.109.49 fortify.cyberxdemo.com" | sudo tee -a /etc/hosts
+              #cat /etc/hosts
+        - name: Run ScanCentral SAST Scan
+          uses: fortify/github-action/sc-sast-scan@v1
+          env:
+            SSC_URL: "http://34.227.109.49:8180/ssc"
+            SSC_TOKEN: "ZjRmY2UxMDItNWE2ZC00NjgzLWIzNDItOGE0MzY5MDI0M2U3"
+            SC_SAST_TOKEN: "CHANGEME321!"
+            SSC_USER: ${{secrets.SSC_USER}}
+            SSC_PASSWORD: ${{secrets.SSC_PWD}}
+            SSC_APPVERSION: "My Application:1.0"
+            SC_SAST_SENSOR_VERSION: 23.2
+            EXTRA_PACKAGE_OPTS: "-bt mvn"
+            EXTRA_SC_SAST_LOGIN_OPTS: --insecure 
+            DO_EXPORT: "true"
+            
+            
+            # EXTRA_SC_SAST_LOGIN_OPTS: --socket-timeout=60s
+            # DO_WAIT: true
+            # TOOL_DEFINITIONS: https://ftfy.mycompany.com/tool-definitions/v1/tool-definitions.yaml.zip
