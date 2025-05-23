@@ -49,7 +49,7 @@ jobs:
           run: |
             java -jar fcli.jar fcli aviator admin-config create --url https://ams.aviator.fortify.com --tenant demo_presales --private-key ./private_key.pem
             #java -jar fcli.jar aviator app create "Sample_WebGoatJava"
-            java -jar fcli.jar aviator token create --email rkumar13@opentext.com --name rkumar_personal2 --save-token token_fvb.json
+            #java -jar fcli.jar aviator token create --email rkumar13@opentext.com --name rkumar_personal2 --save-token token_fvb.json
             java -jar fcli.jar aviator session login --url https://ams.aviator.fortify.com --token token_fvb.json
             java -jar fcli.jar ssc session login --url https://fortify.cyberxdemo.com:8443/ssc -u sscadmin -p P@ssw0rd@123
             java -jar fcli.jar aviator ssc audit --av "Sample_WebGoatJava:1.0" --app "Sample_WebGoatJava"
