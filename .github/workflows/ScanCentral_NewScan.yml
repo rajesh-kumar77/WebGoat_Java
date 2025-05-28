@@ -59,7 +59,7 @@ jobs:
             # SSC_PASSWORD: ${{secrets.SSC_PWD}}
             PACKAGE_EXTRA_OPTS: -bt mvn
             SC_SAST_LOGIN_EXTRA_OPTS: --insecure
-            SSC_APPVERSION: "Sample_WebGoatJava:1.0"
+            SSC_APPVERSION: "Sample_WebGoatJava:2.0"
             SC_SAST_SENSOR_VERSION: 24.2
             DO_EXPORT: "true"
             
