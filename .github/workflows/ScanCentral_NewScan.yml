@@ -61,7 +61,7 @@ jobs:
             SC_SAST_LOGIN_EXTRA_OPTS: --insecure
             SSC_APPVERSION: "Sample_WebGoatJava:2.0"
             SC_SAST_SENSOR_VERSION: 24.2
-            DO_EXPORT: "true"
+            DO_EXPORT: "false"
             
             # EXTRA_SC_SAST_LOGIN_OPTS: --insecure 
             # EXTRA_SC_SAST_LOGIN_OPTS: --socket-timeout=60s
