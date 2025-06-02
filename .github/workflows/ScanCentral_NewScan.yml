@@ -44,7 +44,7 @@ jobs:
               keytool -importcert -noprompt -trustcacerts -alias MyAl3 -file "emSignRootCAG1.crt" -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit
               keytool -import -noprompt -trustcacerts -alias MyA2 -file "emSignSSLCAG1.crt" -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit
               ls -l $JAVA_HOME/lib/security/cacerts
-              sudo echo "35.173.233.51 fortify.cyberxdemo.com" | sudo tee -a /etc/hosts
+              sudo echo "3.86.184.229 fortify.cyberxdemo.com" | sudo tee -a /etc/hosts
               cat /etc/hosts
         - name: Run ScanCentral SAST New Scan
           uses: fortify/github-action@v1
@@ -59,7 +59,7 @@ jobs:
             # SSC_PASSWORD: ${{secrets.SSC_PWD}}
             PACKAGE_EXTRA_OPTS: -bt mvn
             SC_SAST_LOGIN_EXTRA_OPTS: --insecure
-            SSC_APPVERSION: "Sample_WebGoatJava:2.0"
+            SSC_APPVERSION: "Sample_WebGoatJava:3.0"
             SC_SAST_SENSOR_VERSION: 24.2
             DO_EXPORT: "false"
             
