@@ -20,7 +20,7 @@ jobs:
 
       steps:
         - name: Check out source code
-          uses: actions/checkout@v4
+          uses: actions/checkout@v5
           # Java is required to run ScanCentral Client, and may be required for your build
           # Java version to use depends on the Java version required to run your build (if any),
           # and the Java version supported by the ScanCentral Client version that you are running
